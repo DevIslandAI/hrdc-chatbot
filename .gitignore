@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.DS_Store
+
+# Application specific
+downloads/*
+!downloads/.gitkeep
+*.db
+*.sqlite3
+
+# IDEs
+.vscode/
+.idea/
