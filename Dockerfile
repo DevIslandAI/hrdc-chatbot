@@ -20,7 +20,7 @@ COPY . .
 RUN mkdir -p downloads
 
 # Expose port (EasyPanel usually uses 80 or 3000, but we'll stick to 5000 and configure it)
-EXPOSE 5000
+EXPOSE 3000
 
 # Command to run the application using Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:3000", "app:app"]
