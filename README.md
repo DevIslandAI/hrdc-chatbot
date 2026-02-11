@@ -41,3 +41,31 @@ This project scrapes the HRDC website for publication documents, processes them 
 ## 📄 Documentation
 
 For a detailed technical deep-dive into the architecture and implementation, see the [Project Walkthrough](file:///Users/ryan/.gemini/antigravity/brain/9120afbf-de26-4809-8b35-302f0f9dd83b/walkthrough.md).
+
+## 🚀 Deployment
+
+### 1. Push to GitHub
+```bash
+# Initialize git (if not done)
+git init
+git add .
+git commit -m "Initial commit"
+
+# Add your repository (Replace URL with your own)
+git remote add origin https://github.com/YOUR_USERNAME/hrdc-chatbot.git
+git push -u origin main
+```
+
+### 2. Deploy on EasyPanel
+1. Create a new "App" service in your project.
+2. Select your GitHub repository.
+3. Choose **Docker** as the build method.
+4. Set the **Environment Variables**:
+   - `OPENAI_API_KEY`: sk-proj-...
+   - `DATABASE_HOST`: "postgres" (internal service name)
+   - `DATABASE_USER`: "postgres"
+   - `DATABASE_PASSWORD`: "password"
+   - `DATABASE_NAME`: "hrdc2"
+   - `EMBEDDING_MODEL_NAME`: "text-embedding-3-small"
+   - `LLM_MODEL`: "gpt-4o-mini"
+5. Deploy!
