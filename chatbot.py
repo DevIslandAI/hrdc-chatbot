@@ -1,9 +1,6 @@
 import os
 import psycopg2
 from typing import List, Dict, Tuple
-from sentence_transformers import SentenceTransformer
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.schema import Document
 from config import config
 
 class HRDCChatbot:
