@@ -406,6 +406,8 @@ Please answer the question based on the context above."""
             results = self.search_similar_chunks(query, limit=7)
         else:
             results = self.search_by_keyword(query, limit=7)
+            
+        print(f"DEBUG: Found {len(results)} chunks for query: '{query}'")
         
         # Generate RAG response
         response_text = self.generate_answer_with_llm(query, results)

@@ -40,6 +40,25 @@ def health():
     """Health check endpoint"""
     return jsonify({'status': 'healthy'})
 
+@app.route('/stats')
+def stats():
+    """Check database statistics"""
+    try:
+        chatbot.connect_db()
+        with chatbot.db_conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM documents")
+            doc_count = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM document_content")
+            chunk_count = cur.fetchone()[0]
+        chatbot.disconnect_db()
+        return jsonify({
+            'documents': doc_count,
+            'chunks': chunk_count,
+            'status': 'connected'
+        })
+    except Exception as e:
+        return jsonify({'error': str(e), 'status': 'error'}), 500
+
 if __name__ == '__main__':
     # Ensure templates directory exists
     os.makedirs('templates', exist_ok=True)
