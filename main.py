@@ -20,23 +20,29 @@ def main():
     download_dir = config.DOWNLOAD_DIR
     metadata_path = os.path.join(download_dir, 'metadata.json')
     
+    # Auto-run scraper if metadata.json is missing
     if not os.path.exists(metadata_path):
-        print("\n❌ Error: metadata.json not found!")
-        print(f"Expected location: {metadata_path}")
-        return
+        print("\n⚠️  metadata.json not found! Starting scraper to download documents...")
+        print("=" * 80)
+        print("STEP 0: Scraping and Downloading Documents")
+        print("=" * 80)
+        
+        from scraper import HRDCScraper
+        scraper = HRDCScraper()
+        scraper.scrape_all_documents()
+        scraper.download_all_documents()
+        scraper.save_metadata()
+        
+        print("\n✅ Scraping complete. Proceeding to processing...")
     
+    # Double check that files now exist
+    if not os.path.exists(metadata_path):
+        print("\n❌ Error: Scraper failed to generate metadata.json!")
+        return
+
     # Count PDF and DOCX files in downloads directory
     files = [f for f in os.listdir(download_dir) if f.endswith(('.pdf', '.docx', '.doc'))]
     print(f"\n✓ Found {len(files)} document files in {download_dir}")
-    
-    if len(files) == 0:
-        print("\n⚠️  WARNING: No PDF or DOCX files found!")
-        print("\nPlease manually download the documents:")
-        print("1. Open downloads/metadata.json")
-        print("2. For each document, visit the download_url")
-        print("3. Save the files to the downloads/ folder")
-        print("4. Run this script again")
-        return
     
     # Step 1: Process documents
     print("\n" + "=" * 80)
