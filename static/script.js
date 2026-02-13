@@ -48,9 +48,14 @@ async function sendMessage() {
 function addMessage(text, type, sources = []) {
     const div = document.createElement('div');
     div.className = `message ${type}-message`;
-    
-    let content = `<div class="message-content">${text.replace(/\n/g, '<br>')}</div>`;
-    
+
+    let content = '';
+    if (type === 'system') {
+        content = `<div class="message-content">${marked.parse(text)}</div>`;
+    } else {
+        content = `<div class="message-content">${text.replace(/\n/g, '<br>')}</div>`;
+    }
+
     if (sources && sources.length > 0) {
         content += `<div class="sources"><strong>Sources:</strong>`;
         sources.forEach(source => {
@@ -58,7 +63,7 @@ function addMessage(text, type, sources = []) {
         });
         content += `</div>`;
     }
-    
+
     div.innerHTML = content;
     chatWindow.appendChild(div);
     chatWindow.scrollTop = chatWindow.scrollHeight;

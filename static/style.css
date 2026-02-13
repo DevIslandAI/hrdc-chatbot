@@ -112,6 +112,36 @@ header p {
     text-decoration: underline;
 }
 
+/* Markdown Styles */
+.message-content p {
+    margin-bottom: 0.75rem;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.message-content ul, .message-content ol {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+}
+
+.message-content li {
+    margin-bottom: 0.25rem;
+}
+
+.message-content strong {
+    font-weight: 700;
+}
+
+.message-content code {
+    background: #e2e8f0;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+}
+
 footer {
     padding: 1.5rem;
     background: var(--white);
