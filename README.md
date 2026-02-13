@@ -69,3 +69,11 @@ git push -u origin main
    - `EMBEDDING_MODEL_NAME`: "text-embedding-3-small"
    - `LLM_MODEL`: "gpt-4o-mini"
 5. Deploy!
+
+### 3. Initialize Production Database
+Since your local documents are not uploaded (thankfully!), the production database starts **empty**.
+To fill it:
+1. Go to your **App Service** in EasyPanel.
+2. Click the **Console** tab.
+3. Type: `python main.py` and hit Enter.
+   *(This will scrape the documents, process them, and upload them to your live database. It takes about 1-2 minutes.)*
