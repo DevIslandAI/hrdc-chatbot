@@ -20,7 +20,12 @@ COPY . .
 RUN mkdir -p downloads
 
 # Expose port (EasyPanel usually uses 80 or 3000, but we'll stick to 5000 and configure it)
+# Copy startup script
+COPY start.sh .
+RUN chmod +x start.sh
+
+# Expose port (Documentation only, actual port determined by start.sh)
 EXPOSE 80
 
-# Command to run the application using Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]
+# Command to run the application using the startup script
+CMD ["./start.sh"]
